@@ -1,17 +1,18 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        for(int i =0;i<nums.size();i++){
+        int ans = 0; 
+        for(int bit = 0; bit<32; bit++){
             int count = 0;
-            for(int j =0; j<nums.size();j++){
-                if(i!=j && nums[i]==nums[j]){
+            for(int i = 0; i<nums.size(); i++){
+                if(nums[i] & (1<<bit)){
                     count++;
                 }
             }
-            if(count<1){
-                return nums[i];
+            if(count%3==1){
+                ans = ans | 1<<bit;
             }
         }
-        return -1;
+        return ans;
     }
 };
