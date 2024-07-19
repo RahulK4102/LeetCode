@@ -1,18 +1,13 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        map<int,int> ans;
-        for(int  i = 0 ; i<=nums.size(); i++){
-            ans[i] = 0;
+        int XOR = 0; 
+        for(int i = 0; i<=nums.size(); i++){
+            XOR = XOR^i;
         }
-        for(int  i = 0 ; i<nums.size(); i++){
-            ans[nums[i]] = 1;
+        for(int i = 0; i<nums.size(); i++){
+            XOR = XOR^nums[i];
         }
-        for(auto it:ans){
-            if(it.second==0){
-                return it.first;
-            }
-        }
-        return 0 ;
+        return XOR;
     }
 };
