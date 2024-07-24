@@ -5,7 +5,7 @@ public:
         if(mat==target){
             return true;
         }
-        while(count!=4){
+        while(count<4){
             if(mat==target){
                 return true;
             }
