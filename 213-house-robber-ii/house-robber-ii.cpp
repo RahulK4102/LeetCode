@@ -1,17 +1,12 @@
 class Solution {
 public:
-    int Rob(vector<int> &temp){
-        int prev = temp[0];
-        int prev2 = 0;
-        for(int ind = 1; ind<temp.size(); ind++){
-            int take = temp[ind];
-            if(ind>1) take += prev2; 
-            int notTake = prev;
-            int cur = max(take,notTake);
-            prev2 = prev;
-            prev = cur;
-        }
-        return prev;
+    int Rob(vector<int> &temp, vector<int> &dp,int ind){
+        if(ind == 0) return temp[ind];
+        if(ind<0) return 0;
+        if(dp[ind]!=-1) return dp[ind];
+        int take = temp[ind] + Rob(temp,dp,ind-2);
+        int notTake = 0 + Rob(temp,dp,ind-1);
+        return dp[ind] = max(take,notTake);
     }
     int rob(vector<int>& nums) {
         vector<int> temp1,temp2;
@@ -25,6 +20,10 @@ public:
                 temp2.push_back(nums[i]);
             }
         }
-        return max(Rob(temp1),Rob(temp2));
+        vector<int> dp(n,-1);
+        int tem1 = Rob(temp1,dp,temp1.size()-1);
+        vector<int> dP(n,-1);
+        int tem2 = Rob(temp2,dP,temp2.size()-1);
+        return max(tem1,tem2);
     }
 };
