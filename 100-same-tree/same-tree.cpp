@@ -21,11 +21,9 @@ public:
         preOrder(root->right,temp);
     }
     bool isSameTree(TreeNode* p, TreeNode* q) {
-        vector<int> P;
-        vector<int> Q;
-        preOrder(p,P);
-        preOrder(q,Q);
-        if(P!=Q) return false;
-        return true;
+        if(p==NULL || q==NULL){
+            return (p==q);
+        }
+        return (p->val==q->val) && isSameTree(p->left,q->left) && isSameTree(p->right,q->right);
     }
 };
