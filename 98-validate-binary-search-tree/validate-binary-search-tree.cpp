@@ -11,40 +11,25 @@
  */
 class Solution {
 public:
-    void traverse(TreeNode* root,bool &ans,TreeNode* &prev){
+    void check(TreeNode* root,bool &ans,TreeNode* &prev){
         if(!root) return;
-
-        traverse(root->left,ans,prev);
-
+        check(root->left,ans,prev);
         if(!prev){
             prev = root;
-        }
-        else{
-
-            if(prev->val >= root->val){
+        }else{
+            if(prev->val>=root->val){
                 ans = false;
                 return;
+            }else{
+                prev=root;
             }
-
-            else{
-                prev = root;
-            }
-
-
         }
-        traverse(root->right,ans,prev);
-
+        check(root->right,ans,prev);
     }
-
     bool isValidBST(TreeNode* root) {
-        
         bool ans = true;
         TreeNode* prev = NULL;
-
-        traverse(root,ans,prev);
-
+        check(root,ans,prev);
         return ans;
-        
-
     }
 };
